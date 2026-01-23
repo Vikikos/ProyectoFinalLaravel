@@ -9,6 +9,7 @@
 <body>
     <header>
         @include('layout.partials.nav')
+        @include('layout.partials.nav-admin')
     </header>
     <main>
         @yield('main')
