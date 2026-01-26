@@ -31,10 +31,21 @@ class PlayerController extends Controller
     {
         $player = new Player();
 
+        $generateCode = $request->file('photo')->store('players','public');
         $player->name = $request->input('name');
         $player->twitter = $request->input('twitter');
         $player->instagram = $request->input('twitch');
-        $player->visible = $request->input('visible');
+
+        if($request->input('visible')){
+            $player->visible = 1;
+        }else{
+            $player->visible = 0;
+        }
+        $player->photo = $generateCode;
+
+        $player->save();
+
+        return redirect()->route('players.show',$player);
     }
 
     /**
@@ -50,7 +61,7 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
-        //
+        return view('players.edit', compact('player'));
     }
 
     /**
@@ -58,7 +69,21 @@ class PlayerController extends Controller
      */
     public function update(Request $request, Player $player)
     {
-        //
+        $generateCode = $request->file('photo')->store('players','public');
+        $player->name = $request->input('name');
+        $player->twitter = $request->input('twitter');
+        $player->instagram = $request->input('twitch');
+
+        if($request->input('visible')){
+            $player->visible = 1;
+        }else{
+            $player->visible = 0;
+        }
+        $player->photo = $generateCode;
+
+        $player->save();
+
+        return redirect()->route('players.show',$player);
     }
 
     /**

@@ -11,7 +11,7 @@ class PlayerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class PlayerRequest extends FormRequest
         return [
             'name' => ['required','max:30'],
             'photo' =>'required',
-            'visible' => 'boolean:strict'
+            'visible' => ['boolean:strict'],
         ];
     }
     public function messages() 
